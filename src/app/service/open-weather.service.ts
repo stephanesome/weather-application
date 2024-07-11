@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {Observable, throwError, catchError} from "rxjs";
 
 const baseUrl = 'http://api.openweathermap.org/data/2.5/';
-const APPID_HEADER = 'YOUR_API_ID';
+const APPID_HEADER = 'YOUR_APPID_HERE';
 const resource = 'weather';
 
 @Injectable({
@@ -11,7 +11,6 @@ const resource = 'weather';
 })
 export class OpenWeatherService {
   private httpClient: HttpClient = inject(HttpClient);
-  // constructor(private httpClient: HttpClient) { }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     return throwError(() =>

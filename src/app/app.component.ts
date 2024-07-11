@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {Weather} from "./model/weather.model";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
@@ -33,11 +33,8 @@ export class AppComponent  implements OnInit {
   condition: Weather | null = null;
   message: string | null = null;
   currentDate!: number;
-
-
-  constructor(private formBuilder: FormBuilder,
-              private weatherService: OpenWeatherService) {
-  }
+  private formBuilder: FormBuilder = inject(FormBuilder);
+  private weatherService: OpenWeatherService = inject(OpenWeatherService);
 
   ngOnInit(): void {
 
@@ -57,12 +54,6 @@ export class AppComponent  implements OnInit {
         this.condition = parseResponse(response);
       },
       error: (error: any) => {this.condition = null; this.message = error; }
-    }
-      // (response: any) => {
-      //   this.message = null;
-      //   this.currentDate = Date.now();
-      //   this.condition = parseResponse(response); },
-      // (error: any) => {this.condition = null; this.message = error; }
-    );
+    });
   }
 }
